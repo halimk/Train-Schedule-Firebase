@@ -1,4 +1,3 @@
-<script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBSaLQNbYp_9TKRFibwX70CHsy-8qf1WFk",
@@ -13,10 +12,11 @@
 
 $(document).ready(function(){
 	// 1. Link to Firebase
-	var trainData = new Firebase("https://train-database.firebaseio.com/");
+	var database = firebase.database();
 
 	// 2. Button for adding Trains
-	$("#addTrainBtn").on("click", function(){
+	$("#addTrainBtn").on("click", function(event){
+		event.preventDefault();
 
 		// Grabs user input and assign to variables
 		var trainName = $("#trainNameInput").val().trim();
@@ -40,10 +40,10 @@ $(document).ready(function(){
 			destination: destination,
 			trainTime: trainTimeInput,
 			frequency: frequencyInput,
-		}
+		};
 
 		// pushing trainInfo to Firebase
-		trainData.push(newTrain);
+		database.ref().push(newTrain);
 
 		// clear text-boxes
 		$("#trainNameInput").val("");
@@ -52,11 +52,10 @@ $(document).ready(function(){
 		$("#trainInput").val("");
 		$("#frequencyInput").val("");
 
-		// Prevents page from refreshing
-		return false;
+		
 	});
 
-	trainData.on("child_added", function(childSnapshot, prevChildKey){
+	database.ref().on("child_added", function(childSnapshot, prevChildKey){
 
 		console.log(childSnapshot.val());
 
@@ -86,5 +85,5 @@ $(document).ready(function(){
 	});
 });
 
-</script>
+
 
