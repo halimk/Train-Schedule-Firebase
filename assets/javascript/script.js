@@ -19,7 +19,7 @@ event.preventDefault();
 var trainName = $("#trainNameInput").val().trim();
 var lineName = $("#lineInput").val().trim();
 var destination = $("#destinationInput").val().trim();
-var trainTimeInput = moment($("#trainTimeInput").val().trim(), "HH:mm").subtract(10, "years").format("X");;
+var trainTimeInput = moment($("#trainTimeInput").val().trim(), "HH:mm").format("X");;
 var frequencyInput = $("#frequencyInput").val().trim();
 // Test for variables entered
 console.log(trainName);
